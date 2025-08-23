@@ -9,15 +9,15 @@
 struct tagStudent {
     int nID;
     char szName[32];
-    char szNational[32];
     float fMathScore;
+    char szNational[32];
 };
 
 struct tagData {
 	int nID;
-    double dUnkonwn;
 	char szName[32];
-	char szNational[32];
+    double dUnkonwn;
+    char szNational[32];
     float fMathScore;
 };
 
@@ -30,16 +30,16 @@ int main()
     struct tagStudent* ptr = &tom;
 
 	//使用tom赋值
-    int nID = 100;
-    char szName[] = "Tom";
-    char szNational[] = "chinese";
-    float fMathScore = 95.5;
+    tom.nID = 100;
+	strcpy_s(tom.szName, "tom");
+	strcpy_s(tom.szNational, "chinese");
+    tom.fMathScore = 95.5;
 
 	printf("\n使用tom赋值:\n");
-	printf("nIDID: %d\n", nID);
-	printf("szName: %s\n", szName);
-	printf("szNational: %s\n", szNational);
-    printf("fMathScore: %.2f\n", fMathScore);
+	printf("nIDID: %d\n", tom.nID);
+	printf("szName: %s\n", tom.szName);
+	printf("szNational: %s\n", tom.szNational);
+    printf("fMathScore: %.2f\n", tom.fMathScore);
     
     //使用ptr赋值
     ptr->nID = 1000;
