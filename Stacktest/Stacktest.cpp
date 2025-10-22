@@ -2,45 +2,54 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+struct Node {
+	int data;
+	struct Node* next;
+};
+
 struct Stack {
-	int data[5];
-	int top;
+	struct Node* top;
+	int size;
 
 };
 Stack* create_stack(){
 	Stack* stack = (Stack*)malloc(sizeof(Stack));
-	stack-> top = -1;
+	stack-> top = NULL;
+	stack->size = 0;
 	return stack;
 }
 
 void push(Stack* stack, int value) {
-	if (stack->top < 4) {
-		stack->top++;
-		stack->data[stack->top] = value;
-	}
-	else {
-		printf("栈已满");
-	}
+	struct Node* new_node = (struct Node*)malloc(sizeof(Node));
+	new_node->data = value;
+	new_node->next = stack->top;
+	stack->top = new_node;
+	stack->size++;
 }	
 
 void pop(Stack* stack) {
-	if (stack->top == -1) {
+	if (stack->top == NULL) {
 		printf("栈为空");
 	}
 	else {
-		stack->top--;
+		Node* temp = stack->top;
+		stack->top = stack->top->next;
+		stack->size--;
+		free(temp);
 	}
 	}
 
 void print_stack(Stack* stack) {
-	if (stack->top == -1) {
+	if (stack->top == NULL) {
 		printf("栈为空\n");
 	}
 	else {
-		for(int i = 0;i <=stack->top;i++){
-			printf("%d ", stack->data[i]);
+		Node* temp = stack->top;
+		while(temp != NULL){
+			printf("%d ", temp->data);
+			temp = temp->next;
 	}
-	printf("\n");
+	printf("size: %d\n",stack->size);
 	}
 }
 
